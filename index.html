@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyLife App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>MyLife App</h1>
+            <p>Ваш личный помощник</p>
+        </header>
+
+        <main class="main-grid">
+            <!-- Карточка Привычки -->
+            <div class="card" onclick="showSection('habits')">
+                <h2>Привычки</h2>
+                <p>Отслеживайте свой прогресс</p>
+            </div>
+
+            <!-- Карточка Бюджет -->
+            <div class="card" onclick="showSection('budget')">
+                <h2>Бюджет</h2>
+                <p>Контролируйте финансы</p>
+            </div>
+
+            <!-- Карточка Задачи -->
+            <div class="card" onclick="showSection('tasks')">
+                <h2>Задачи</h2>
+                <p>Планируйте свой день</p>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
