@@ -53,6 +53,61 @@ function initApp() {
     
     // Здесь будем загружать данные, настраивать интерфейс
 }
-
+// Функция для тестирования базы данных
+async function testDatabase() {
+    const output = document.getElementById('test-output');
+    output.style.display = 'block';
+    output.innerHTML = 'Тестируем базу данных... ⏳';
+    
+    try {
+        // Инициализируем базу
+        await testDB.init();
+        output.innerHTML += '<br>✅ База инициализирована';
+        
+        // Добавляем тестовые привычки
+        const habits = await testDB.addTestHabits();
+        output.innerHTML += `<br>✅ Добавлено ${habits.length} тестовых привычек`;
+        
+        // Показываем результат
+        output.innerHTML += '<br><br><strong>Сохранённые привычки:</strong>';
+        habits.forEach(habit => {
+            output.innerHTML += `<br>• ${habit.name} (ID: ${habit.id})`;
+        });
+        
+        output.innerHTML += '<br><br>🎉 База данных работает!';
+        
+    } catch (error) {
+        output.innerHTML += `<br>❌ Ошибка: ${error.message}`;
+    }
+}
 // Запускаем приложение когда страница загрузилась
 document.addEventListener('DOMContentLoaded', initApp);
+ 
+
+// Функция для тестирования базы данных
+async function testDatabase() {
+    const output = document.getElementById('test-output');
+    output.style.display = 'block';
+    output.innerHTML = 'Тестируем базу данных... ⏳';
+    
+    try {
+        // Инициализируем базу
+        await testDB.init();
+        output.innerHTML += '<br>✅ База инициализирована';
+        
+        // Добавляем тестовые привычки
+        const habits = await testDB.addTestHabits();
+        output.innerHTML += `<br>✅ Добавлено ${habits.length} тестовых привычек`;
+        
+        // Показываем результат
+        output.innerHTML += '<br><br><strong>Сохранённые привычки:</strong>';
+        habits.forEach(habit => {
+            output.innerHTML += `<br>• ${habit.name} (ID: ${habit.id})`;
+        });
+        
+        output.innerHTML += '<br><br>🎉 База данных работает!';
+        
+    } catch (error) {
+        output.innerHTML += `<br>❌ Ошибка: ${error.message}`;
+    }
+}
