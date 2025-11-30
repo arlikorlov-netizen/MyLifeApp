@@ -148,7 +148,7 @@ h1 {
 
 /* Тестовая кнопка */
 button {
-    background: #007aff;
+    background: #ff3b30; /* Был синий, стал красный */
     color: white;
     border: none;
     padding: 12px 20px;
@@ -156,4 +156,34 @@ button {
     cursor: pointer;
     font-size: 16px;
     margin-top: 20px;
+}
+
+/* Стили для тестовой секции базы данных */
+.test-section {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.test-section button {
+    background: #5856d6;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.test-section button:hover {
+    background: #4846c6;
+}
+
+#test-output {
+    margin-top: 10px;
+    padding: 15px;
+    background: #f0f0f0;
+    border-radius: 8px;
+    text-align: left;
+    font-size: 14px;
+    border-left: 4px solid #5856d6;
 }
