@@ -111,3 +111,67 @@ async function testDatabase() {
         output.innerHTML += `<br>❌ Ошибка: ${error.message}`;
     }
 }
+// Простой тест IndexedDB
+async function testDatabase() {
+    const output = document.getElementById('test-output');
+    output.innerHTML = 'Тестируем базу данных... ⏳';
+    
+    try {
+        // Используем Promise для работы с IndexedDB
+        const db = await new Promise((resolve, reject) => {
+            const request = indexedDB.open('MyLifeApp_SimpleTest', 1);
+            
+            request.onerror = () => reject(request.error);
+            request.onsuccess = () => resolve(request.result);
+            
+            request.onupgradeneeded = (event) => {
+                const db = event.target.result;
+                if (!db.objectStoreNames.contains('habits')) {
+                    db.createObjectStore('habits', { 
+                        keyPath: 'id', 
+                        autoIncrement: true 
+                    });
+                }
+            };
+        });
+        
+        output.innerHTML += '<br>✅ База открыта успешно';
+        
+        // Добавляем тестовую привычку
+        const habitId = await new Promise((resolve, reject) => {
+            const transaction = db.transaction(['habits'], 'readwrite');
+            const store = transaction.objectStore('habits');
+            
+            const habit = {
+                name: 'Тестовая привычка ' + new Date().getTime(),
+                createdAt: new Date().toISOString(),
+                completed: false
+            };
+            
+            const request = store.add(habit);
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(request.error);
+        });
+        
+        output.innerHTML += `<br>✅ Привычка добавлена (ID: ${habitId})`;
+        
+        // Читаем все привычки
+        const allHabits = await new Promise((resolve, reject) => {
+            const transaction = db.transaction(['habits'], 'readonly');
+            const store = transaction.objectStore('habits');
+            const request = store.getAll();
+            
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => reject(request.error);
+        });
+        
+        output.innerHTML += `<br>✅ Всего привычек: ${allHabits.length}`;
+        output.innerHTML += '<br><br>🎉 База данных работает!';
+        
+        db.close();
+        
+    } catch (error) {
+        output.innerHTML += `<br>❌ Ошибка: ${error.message}`;
+        console.error('Ошибка теста:', error);
+    }
+}
