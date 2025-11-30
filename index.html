@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Кнопка-бургер -->
+    <button class="burger-btn" onclick="toggleSidebar()">☰</button>
+
     <div class="container">
         <header>
             <h1>MyLife App</h1>
@@ -32,31 +35,30 @@
                 <p>Планируйте свой день</p>
             </div>
         </main>
+
+        <!-- Тестовая кнопка для проверки JavaScript -->
+        <button onclick="testFunction()">Нажми меня для теста</button>
     </div>
-<!-- Тестовая кнопка для проверки JavaScript -->
-<button onclick="testFunction()">Нажми меня для теста</button>
+
+    <!-- Боковая панель -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Меню</h3>
+            <button class="close-btn" onclick="toggleSidebar()">×</button>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" onclick="showSection('habits')">Привычки</a>
+            <a href="#" onclick="showSection('budget')">Бюджет</a>
+            <a href="#" onclick="showSection('tasks')">Задачи</a>
+            <a href="#" onclick="showSection('settings')">Настройки</a>
+        </nav>
+    </div>
+
+    <!-- Оверлей для закрытия боковой панели -->
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
     <script src="script.js"></script>
-<!-- Боковая панель -->
-<div class="sidebar" id="sidebar">
-    <div class="sidebar-header">
-        <h3>Меню</h3>
-        <button class="close-btn" onclick="toggleSidebar()">×</button>
-    </div>
-    <nav class="sidebar-nav">
-        <a href="#" onclick="showSection('habits')">Привычки</a>
-        <a href="#" onclick="showSection('budget')">Бюджет</a>
-        <a href="#" onclick="showSection('tasks')">Задачи</a>
-        <a href="#" onclick="showSection('settings')">Настройки</a>
-    </nav>
-</div>
-
-<!-- Оверлей для закрытия боковой панели -->
-<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
-
-<!-- Кнопка-бургер в хедере -->
-<button class="burger-btn" onclick="toggleSidebar()">☰</button>
 </body>
-
 </html>
+
 
