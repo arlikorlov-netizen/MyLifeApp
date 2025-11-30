@@ -64,6 +64,65 @@
     <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
 
     <script src="script.js"></script>
-    <script src="test-db.js"></script>
+// Простой тест IndexedDB
+async function testDatabase() {
+    const output = document.getElementById('test-output');
+    output.innerHTML = 'Тестируем базу данных... ⏳';
+    
+    try {
+        // Создаём простую базу без классов
+        const dbName = 'MyLifeApp_SimpleTest';
+        const request = indexedDB.open(dbName, 1);
+        
+        request.onerror = (event) => {
+            throw new Error('Ошибка открытия базы: ' + event.target.error);
+        };
+        
+        request.onsuccess = (event) => {
+            const db = event.target.result;
+            output.innerHTML += '<br>✅ База открыта успешно';
+            
+            // Создаём транзакцию
+            const transaction = db.transaction(['habits'], 'readwrite');
+            const store = transaction.objectStore('habits');
+            
+            // Добавляем тестовую привычку
+            const habit = {
+                name: 'Тестовая привычка',
+                createdAt: new Date().toISOString(),
+                completed: false
+            };
+            
+            const addRequest = store.add(habit);
+            
+            addRequest.onsuccess = () => {
+                output.innerHTML += `<br>✅ Привычка добавлена (ID: ${addRequest.result})`;
+                
+                // Читаем все привычки
+                const getAllRequest = store.getAll();
+                getAllRequest.onsuccess = () => {
+                    output.innerHTML += `<br>✅ Всего привычек: ${getAllRequest.result.length}`;
+                    output.innerHTML += '<br><br>🎉 База данных работает!';
+                    db.close();
+                };
+            };
+        };
+        
+        request.onupgradeneeded = (event) => {
+            const db = event.target.result;
+            if (!db.objectStoreNames.contains('habits')) {
+                db.createObjectStore('habits', { 
+                    keyPath: 'id', 
+                    autoIncrement: true 
+                });
+                output.innerHTML += '<br>✅ Хранилище создано';
+            }
+        };
+        
+    } catch (error) {
+        output.innerHTML += `<br>❌ Ошибка: ${error.message}`;
+        console.error('Ошибка теста:', error);
+    }
+}
 </body>
 </html>
