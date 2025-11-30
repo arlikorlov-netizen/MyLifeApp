@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyLife App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Кнопка-бургер -->
+        <button class="burger-btn" onclick="toggleSidebar()">☰</button>
+
+        <header>
+            <h1>MyLife App</h1>
+            <p>Ваш личный помощник</p>
+        </header>
+
+        <main class="main-grid">
+            <!-- Карточка Привычки -->
+            <div class="card" onclick="showSection('habits')">
+                <h2>Привычки</h2>
+                <p>Отслеживайте свой прогресс</p>
+            </div>
+
+            <!-- Карточка Бюджет -->
+            <div class="card" onclick="showSection('budget')">
+                <h2>Бюджет</h2>
+                <p>Контролируйте финансы</p>
+            </div>
+
+            <!-- Карточка Задачи -->
+            <div class="card" onclick="showSection('tasks')">
+                <h2>Задачи</h2>
+                <p>Планируйте свой день</p>
+            </div>
+        </main>
+
+        <!-- Тестовая кнопка для проверки JavaScript -->
+        <button onclick="testFunction()">Нажми меня для теста!</button>
+    </div>
+
+    <!-- Боковая панель (ВНЕ основного контейнера) -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Меню</h3>
+            <button class="close-btn" onclick="toggleSidebar()">×</button>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="#" onclick="showSection('habits'); return false;">Привычки</a>
+            <a href="#" onclick="showSection('budget'); return false;">Бюджет</a>
+            <a href="#" onclick="showSection('tasks'); return false;">Задачи</a>
+            <a href="#" onclick="showSection('settings'); return false;">Настройки</a>
+        </nav>
+    </aside>
+
+    <!-- Оверлей для закрытия боковой панели -->
+    <div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
